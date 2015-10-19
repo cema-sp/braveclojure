@@ -36,7 +36,7 @@
   [minimum-glitter records]
   (filter #(>= (:glitter-index %) minimum-glitter) records))
 
-(defn -main
-  "I don't do a whole lot ... yet."
-  [& args]
-  (println "Hello, World!"))
+;;(defn -main
+;;  "I don't do a whole lot ... yet."
+;;  [& args]
+;;  (println "Hello, World!"))
