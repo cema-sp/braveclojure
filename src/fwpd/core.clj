@@ -13,11 +13,28 @@
 (def conversions {:name identity
                   :glitter-index str->int})
 
-(def parse
+(defn parse
   "Convert a CSV into rows of columns"
   [string]
   (map #(s/split % #",")
        (s/split string #"\n")))
+
+(defn mapify
+  "Return a seq of maps like {:name \"Edward Cullen\" :glitter-index 10}"
+  [rows]
+  (let [headers (map #(get headers->keywords %) (first rows))
+        unmapped-rows (rest rows)]
+    (map (fn [unmapped-row]
+           (into {}
+                 (map (fn [header column]
+                        [header ((get conversions header) column)])
+                      headers
+                      unmapped-row)))
+         unmapped-rows)))
+
+(defn glitter-filter
+  [minimum-glitter records]
+  (filter #(>= (:glitter-index %) minimum-glitter) records))
 
 (defn -main
   "I don't do a whole lot ... yet."
