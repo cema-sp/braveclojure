@@ -12,4 +12,5 @@ pom.xml.asc
 
 # Vim temp files
 *.swp
+/.*.swp
 
